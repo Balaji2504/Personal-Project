@@ -48,7 +48,7 @@ This repository contains a **Hierarchical Retrieval-Augmented Generation (H-RAG)
 
     ```bash
     git clone https://github.com/your_username/your_repo_name.git
-    cd your_repo_name
+    cd https://github.com/Balaji2504/Personal-Project/tree/main/Hierarchical-Retrieval-Augmented-Generation-H-RAG-System-main
     ```
 
 2. **Install dependencies:**
