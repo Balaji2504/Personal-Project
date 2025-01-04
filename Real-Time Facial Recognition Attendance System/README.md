@@ -44,19 +44,17 @@ This project is a **Real-Time Facial Recognition Attendance System** that automa
    - Provide voice feedback for both scenarios.
 3. Press `q` to quit the application.
 
----
-
-## **Project Structure**
+## Project Structure
+```
 real-time-attendance-system/
-├── student_images/          # Folder containing images of registered individuals
-├── Attendance/              # Folder where daily attendance logs are saved
-├── Unknown/                 # Folder where unknown face images are stored
-├── encodings.pkl            # File storing pre-computed facial encodings
-├── Main.py                  # Main program file
-├── requirements.txt         # Python dependencies
-└── README.md                # Project documentation
-
----
+├── student_images/         # Folder containing images of registered individuals
+├── Attendance/             # Folder where daily attendance logs are saved
+├── Unknown/                # Folder where unknown face images are stored
+├── encodings.pkl           # File storing pre-computed facial encodings
+├── Main.py                 # Main program file
+├── requirements.txt        # Python dependencies
+└── README.md               # Project documentation
+```
 
 ## **Example Workflow**
 1. **Recognition**: The webcam captures live video frames.
