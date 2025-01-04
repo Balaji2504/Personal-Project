@@ -1,44 +1,151 @@
 # Image Captioning using LSTM
 
-**Technologies Used:** Python, TensorFlow, Streamlit
+## Overview
+This project demonstrates the creation of an image captioning system using a combination of a pre-trained VGG16 model for feature extraction and an LSTM-based neural network for caption generation. It integrates a user-friendly interface developed with Streamlit, making the system accessible for end-users to upload images and receive descriptive captions.
 
-## Dataset:
+---
 
-The project utilizes the Flickr8k dataset, a collection of images along with their corresponding captions.
+## Key Features
+- **Dataset**: Utilizes the Flickr8k dataset containing images and corresponding captions.
+- **Feature Extraction**: Employs the VGG16 model to extract features from images by removing its final layer.
+- **Caption Preprocessing**: Processes and cleans image descriptions to create a uniform vocabulary corpus.
+- **LSTM Model**: Combines image features and text sequences to generate captions word by word.
+- **Evaluation**: Measures caption quality using the BLEU score.
+- **Streamlit UI**: Provides an interactive interface for image upload and caption generation.
 
-## Feature Extraction using VGG16:
+---
 
-Initially, the VGG16 model is employed to extract features from all images. VGG16 is a pre-trained Convolutional Neural Network (CNN) architecture typically used for tasks such as image classification and recognition. To leverage its capabilities as a feature extractor, the final layer of the VGG16 model is removed, allowing the extraction of features from the images using the intermediate layers of the model.
+## Technologies Used
+- **Programming Language**: Python
+- **Deep Learning Framework**: TensorFlow
+- **User Interface**: Streamlit
 
-## Load, Clean, and Save Image Descriptions:
+---
 
-The descriptions associated with the images undergo preprocessing steps to ensure uniformity and cleanliness. This includes converting text to lowercase, removing punctuation, and retaining only alphabetic characters. Subsequently, a vocabulary corpus containing all the words from the descriptions is created. The cleaned descriptions are saved for future use. The training images, descriptions, and features are loaded, and tokenization is performed on the train descriptions.
+## Project Workflow
 
-## Preparing Data for LSTM Model:
+### 1. Dataset
+The Flickr8k dataset, which consists of 8,000 images paired with descriptive captions, is used for this project. Captions serve as the ground truth for training and evaluating the model.
 
-Data preparation involves generating inputs for the LSTM model. This includes creating two inputs: one for the image features and the other for the input sequence (text) to predict the next word in the sequence (caption) as an output. Padding is applied to the input sequence with zeros to match the maximum length among all descriptions. The output sequence is then one-hot encoded with a size corresponding to the vocabulary corpus size. 
+### 2. Feature Extraction with VGG16
+- The VGG16 model, a pre-trained Convolutional Neural Network (CNN), is used as a feature extractor.
+- The final layer of VGG16 is removed, enabling the extraction of intermediate features from input images.
 
-## Defining LSTM Model:
+### 3. Data Preprocessing
+#### Description Cleaning:
+- Text is converted to lowercase.
+- Punctuation is removed.
+- Only alphabetic characters are retained.
 
-The LSTM model architecture is defined with two input layers: one for image features and the other for the input sequence. The image features are processed through a dropout layer followed by a dense layer to extract relevant features. Similarly, the input sequence is passed through an embedding layer to convert integer-encoded words into dense vectors. A dropout layer is applied for regularization, and an LSTM layer processes the sequential input. The output of both the image and sequence models are concatenated and passed through dense layers to predict the next word in the sequence.
+#### Vocabulary Creation:
+- A vocabulary corpus is generated from the cleaned descriptions.
+- Processed descriptions are saved for future use.
 
-## Model Compilation:
+### 4. Data Preparation for LSTM
+- **Input Generation**:
+  - Two inputs are created for the model:
+    1. Image features extracted using VGG16.
+    2. Input text sequence to predict the next word.
+- **Padding**:
+  - Input sequences are padded with zeros to ensure consistent length.
+- **One-Hot Encoding**:
+  - Output sequences are one-hot encoded based on the vocabulary size.
 
-The model is compiled using categorical cross-entropy loss and the Adam optimizer.
+### 5. LSTM Model Architecture
+- **Input Layers**:
+  - Image features input.
+  - Text sequence input.
+- **Processing Steps**:
+  - Image features are passed through a dropout layer and dense layer.
+  - Input sequences are passed through an embedding layer, followed by dropout and LSTM layers.
+- **Feature Fusion**:
+  - Outputs from both inputs are concatenated and processed through dense layers to predict the next word.
 
-## Training the Model:
+### 6. Model Compilation and Training
+- The model is compiled with:
+  - **Loss Function**: Categorical cross-entropy.
+  - **Optimizer**: Adam.
+- Training is conducted for 20 epochs to minimize loss and improve accuracy.
 
-The model is trained for 20 epochs to iteratively improve accuracy and minimize loss. The last model iteration is considered the best model for further prediction and evaluation tasks.
+### 7. Prediction and Evaluation
+- **Caption Generation**:
+  - Captions are generated word by word until a stopping condition is met.
+- **Evaluation**:
+  - BLEU scores are used to assess the similarity between machine-generated captions and reference captions.
+  - Corpus BLEU scores evaluate the model's overall performance.
 
-## Prediction and Evaluation:
+### 8. Streamlit User Interface
+- **Functionality**:
+  - Allows users to upload images.
+  - Extracts features using VGG16.
+  - Predicts captions word by word using the LSTM model.
+  - Displays the generated caption on the interface.
 
-Caption generation is performed word by word, and the generated captions are evaluated using the BLEU (Bilingual Evaluation Understudy) score. BLEU provides a numerical score representing the similarity between the machine-generated captions and reference captions. The corpus BLEU score is computed to evaluate the entire set of generated captions for test images.
+---
 
-## Streamlit UI:
+## Installation and Setup
 
-A user-friendly interface is developed using Streamlit, allowing users to upload images. The uploaded images undergo feature extraction using the VGG16 model. These extracted features, along with input sequences, are then fed into the LSTM model to predict caption word by word. The generated words are joined together and the caption is displayed on the interface for user interaction.
+### Prerequisites
+1. Python 3.8 or higher installed.
+2. TensorFlow and Streamlit installed.
+3. Download and extract the Flickr8k dataset.
 
-![Screenshot 2024-05-10 182959](https://github.com/PriyadharshiniV21/Image-Captioning-using-LSTM/assets/111731598/f2ff2c1a-55fe-4959-90d1-510c97f6206f)
+### Steps
 
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/image-captioning-lstm.git
+   cd image-captioning-lstm
+   ```
 
-This comprehensive project description outlines the entire process from data preprocessing to model training, evaluation, and integration into a user interface using Streamlit.
+2. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Prepare Dataset**:
+   - Place the Flickr8k dataset in the specified folder.
+   - Run the preprocessing script to clean and save descriptions.
+
+4. **Train the Model**:
+   - Extract features using VGG16.
+   - Train the LSTM model using the prepared data.
+
+5. **Run the Application**:
+   ```bash
+   streamlit run app.py
+   ```
+
+6. **Access the Application**:
+   - Open [http://localhost:8501](http://localhost:8501) in your browser.
+
+---
+
+## Project Structure
+```
+image-captioning-lstm/
+├── Image Captioning.ipynb   # Jupyter notebook with full workflow
+├── app.py                   # Streamlit application
+├── descriptions.txt         # Cleaned and preprocessed captions
+├── Prediction.png           # Sample prediction result image
+├── README.md                # Project documentation
+├── requirements.txt         # Python dependencies
+```
+
+---
+
+## Example
+1. **Upload an Image**: Drag and drop or select an image file.
+2. **Generated Caption**: View the machine-generated caption below the image.
+
+---
+
+## Acknowledgments
+- **TensorFlow**: For providing tools to build and train the model.
+- **Streamlit**: For creating an intuitive user interface.
+- **Flickr8k Dataset**: For serving as the foundational dataset for the project.
+
+---
+
+## License
+This project is licensed under the MIT License.
