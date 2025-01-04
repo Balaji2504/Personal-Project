@@ -94,7 +94,7 @@ The Flickr8k dataset, which consists of 8,000 images paired with descriptive cap
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/image-captioning-lstm.git
+   git clone https://github.com/Balaji2504/Personal-Project/tree/main/Image-Captioning-using-LSTM-main
    cd image-captioning-lstm
    ```
 
